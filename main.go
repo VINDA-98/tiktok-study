@@ -21,7 +21,7 @@ func main() {
 	initRouter(r)
 	//pprof
 	pprof.Register(r)
-	err := r.Run()
+	err := r.Run(":9099")
 	if err != nil {
 		return
 	} // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
