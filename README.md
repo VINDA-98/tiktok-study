@@ -42,27 +42,27 @@ tiktok
 ### 开发的整体设计
 #### 整体的架构图
 <p align="center">
-  <a href="https://github.com/HammerCloth/tiktok.git/">
+  <a href="https://github.com/VINDA-98/tiktok-study.git/">
     <img src="images/framework.jpg" alt="Logo" width="1000" height="500">
   </a>
 
 #### 数据库的设计
 <p align="center">
-  <a href="https://github.com/HammerCloth/tiktok.git/">
+  <a href="https://github.com/VINDA-98/tiktok-study.git/">
     <img src="images/mysql.jpg" alt="Logo" width="800" height="600">
   </a>
 </p>
 
 #### Redis架构的设计
 <p align="center">
-  <a href="https://github.com/HammerCloth/tiktok.git/">
+  <a href="https://github.com/VINDA-98/tiktok-study.git/">
     <img src="images/redis.jpg" alt="Logo" width="1000" height="600">
   </a>
 </p>
 
 #### RabbitMQ架构的设计
 <p align="center">
-  <a href="https://github.com/HammerCloth/tiktok.git/">
+  <a href="https://github.com/VINDA-98/tiktok-study.git/">
     <img src="images/rabbitmq.jpg" alt="Logo" width="1000" height="600">
   </a>
 </p>
@@ -90,7 +90,7 @@ tiktok
 详情阅读[评论模块的设计说明](https://bytedancecampus1.feishu.cn/docs/doccnDqfcZJW4tTD409NGlYfvCb) 查阅为该模块的详细设计。
 
 ### 性能测试
-通过命令 go tool pprof -http=:6060 "http://localhost:8080/debug/pprof/profile?seconds=120" 生成了两个版本的火焰图，左图为v1.0，右图为v1.2版本，通过对比两张详细火焰图，优化后的相同方法调用时间更短（添加了相应的中间件）
+通过命令 go tool pprof -http=:6060 "http://localhost:9099/debug/pprof/profile?seconds=120" 生成了两个版本的火焰图，左图为v1.0，右图为v1.2版本，通过对比两张详细火焰图，优化后的相同方法调用时间更短（添加了相应的中间件）
 
 <p align="center">
 <a href="https://github.com/HammerCloth/tiktok.git/">
