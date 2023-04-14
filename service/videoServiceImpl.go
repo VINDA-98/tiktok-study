@@ -20,7 +20,7 @@ type VideoServiceImpl struct {
 // Feed
 // 通过传入时间戳，当前用户的id，返回对应的视频数组，以及视频数组中最早的发布时间
 // 获取视频数组大小是可以控制的，在config中的videoCount变量
-func (videoService VideoServiceImpl) Feed(lastTime time.Time, userId int64) ([]Video, time.Time, error) {
+func (videoService *VideoServiceImpl) Feed(lastTime time.Time, userId int64) ([]Video, time.Time, error) {
 	//创建对应返回视频的切片数组，提前将切片的容量设置好，可以减少切片扩容的性能
 	videos := make([]Video, 0, config.VideoCount)
 	//根据传入的时间，获得传入时间前n个视频，可以通过config.videoCount来控制
@@ -80,7 +80,12 @@ func (videoService *VideoServiceImpl) Publish(data *multipart.FileHeader, userId
 		return err
 	}
 	log.Printf("方法dao.VideoFTP(file, videoName) 成功")
-	defer file.Close()
+	defer func(file multipart.File) {
+		err := file.Close()
+		if err != nil {
+
+		}
+	}(file)
 	//在服务器上执行ffmpeg 从视频流中获取第一帧截图，并上传图片服务器，保存图片链接
 	imageName := uuid.NewV4().String()
 	//向队列中添加消息
@@ -131,7 +136,7 @@ func (videoService *VideoServiceImpl) copyVideos(result *[]Video, data *[]dao.Ta
 	return nil
 }
 
-//将video进行组装，添加想要的信息,插入从数据库中查到的数据
+// 将video进行组装，添加想要的信息,插入从数据库中查到的数据
 func (videoService *VideoServiceImpl) creatVideo(video *Video, data *dao.TableVideo, userId int64) {
 	//建立协程组，当这一组的携程全部完成后，才会结束本方法
 	var wg sync.WaitGroup
